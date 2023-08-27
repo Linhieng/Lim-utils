@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "davidanson.vscode-markdownlint",
+    "mikebovenlander.formate",
+    "formulahendry.code-runner",
+    "darkriszty.markdown-table-prettify",
+    "shd101wyy.markdown-preview-enhanced"
+  ]
+}
