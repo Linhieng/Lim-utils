@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "jest single file",
+      "type": "shell",
+      "command": "npx",
+      "args": ["jest", "${fileBasename}"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "detail": "测试当前 *.test.js 文件"
+    },
+    {
+      "label": "npm: test",
+      "type": "npm",
+      "script": "test",
+      "group": "test",
+      "detail": "运行所有测试"
+    }
+  ]
+}
