@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe width="600" src="https://moe-counter.glitch.me/get/@linhieng?theme=gelbooru" frameborder="0"></iframe>
+    <br>
+    <button id="resume">resume</button><br>
+    <button id="pause">pause</button><br>
+    <button id="toggle">toggle</button><br>
+    <button id="destroy">destroy</button><br>
+    <script>
+
+        const hack = (task, timeout = 1000, loop = Infinity) => {
+            if (loop < 0) loop = -loop
+            let isRunning = false
+
+            const run = async () => {
+                if (!isRunning) return
+                if (loop--) return
+                task()
+                await new Promise(resolve => setTimeout(resolve, timeout))
+                run()
+            }
+
+            const resume = () => {
+                isRunning = true
+                run()
+            }
+            const pause = () => {
+                isRunning = false
+            }
+            const toggle = () => {
+                isRunning ? pause() : resume()
+            }
+            const destroy = () => {
+                isRunning = false
+                resume = pause = toggle = destroy = null
+            }
+
+            return function emit(type) {
+                switch (type) {
+                    case 'resume': resume(); break
+                    case 'pause': pause(); break
+                    case 'toggle': toggle(); break
+                    case 'destroy': destroy(); break
+                }
+            }
+        }
+
+
+        iframe = document.querySelector('iframe')
+        const refresh = () => iframe.src = iframe.src
+        const emit = hack(refresh, 600)
+
+        document.querySelector('button#resume').onclick = () => emit('resume')
+        document.querySelector('button#pause').onclick = () => emit('pause')
+        document.querySelector('button#toggle').onclick = () => emit('toggle')
+        document.querySelector('button#destroy').onclick = () => emit('destroy')
+    </script>
+</body>
+
+</html>
