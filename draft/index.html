@@ -24,12 +24,11 @@
     <script>
 
         const hack = (task, timeout = 1000, loop = Infinity) => {
-            if (loop < 0) loop = -loop
             let isRunning = false
 
             const run = async () => {
                 if (!isRunning) return
-                if (loop-- === 0) return
+                if (loop-- < 0) return
                 task()
                 await new Promise(resolve => setTimeout(resolve, timeout))
                 run()
