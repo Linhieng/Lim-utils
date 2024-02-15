@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>欸，就是玩</title>
 </head>
 
 <body>
-    <iframe width="600" src="https://moe-counter.glitch.me/get/@linhieng?theme=gelbooru" frameborder="0"></iframe>
-    <br>
-    <button id="resume">resume</button><br>
-    <button id="pause">pause</button><br>
-    <button id="toggle">toggle</button><br>
-    <button id="destroy">destroy</button><br>
+    <div><iframe width="600" src="https://moe-counter.glitch.me/get/@linhieng?theme=gelbooru" frameborder="0"></iframe></div>
+    <button id="resume">resume</button>
+    <button id="pause">pause</button>
+    <button id="toggle">toggle</button>
+    <button id="destroy">destroy</button>
+    <style>
+        button {
+            width: 60px;
+            height: 30px;
+            margin: 10px;
+            border-radius: 6px;
+        }
+    </style>
     <script>
 
         const hack = (task, timeout = 1000, loop = Infinity) => {
@@ -22,7 +29,7 @@
 
             const run = async () => {
                 if (!isRunning) return
-                if (loop--) return
+                if (loop-- === 0) return
                 task()
                 await new Promise(resolve => setTimeout(resolve, timeout))
                 run()
@@ -54,9 +61,9 @@
         }
 
 
-        iframe = document.querySelector('iframe')
+        const iframe = document.querySelector('iframe')
         const refresh = () => iframe.src = iframe.src
-        const emit = hack(refresh, 600)
+        const emit = hack(refresh)
 
         document.querySelector('button#resume').onclick = () => emit('resume')
         document.querySelector('button#pause').onclick = () => emit('pause')
