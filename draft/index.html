@@ -34,17 +34,19 @@
                 run()
             }
 
-            const resume = () => {
-                isRunning = true
-                run()
+            let resume = () => {
+                if (!isRunning) {
+                    isRunning = true
+                    run()
+                }
             }
-            const pause = () => {
+            let pause = () => {
                 isRunning = false
             }
-            const toggle = () => {
+            let toggle = () => {
                 isRunning ? pause() : resume()
             }
-            const destroy = () => {
+            let destroy = () => {
                 isRunning = false
                 resume = pause = toggle = destroy = null
             }
