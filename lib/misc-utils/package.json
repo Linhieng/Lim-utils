@@ -1,0 +1,25 @@
+{
+    "name": "@linhieng/misc-utils",
+    "description": "自用杂烩工具包",
+    "version": "0.1.0",
+    "license": "MIT",
+    "author": "Linhieng",
+    "repository": "linhieng/misc-utils",
+    "homepage": "https://github.com/Linhieng/misc-utils",
+    "main": "src/index.js",
+    "exports": {
+        ".": "./dist/index.js",
+        "./limit": {
+            "import": "./src/promise-limit/index.js"
+        }
+    },
+    "scripts": {
+        "install-to-local": "node ./script/install-to-global.js"
+    },
+    "files": [
+        "src/**/*"
+    ],
+    "engines": {
+        "node": ">=20"
+    }
+}
