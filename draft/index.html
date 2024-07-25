@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欸，就是玩</title>
+</head>
+
+<body>
+    <div><iframe width="600" src="https://moe-counter.glitch.me/get/@linhieng?theme=gelbooru" frameborder="0"></iframe></div>
+    <button id="resume">resume</button>
+    <button id="pause">pause</button>
+    <button id="toggle">toggle</button>
+    <button id="destroy">destroy</button>
+    <style>
+        button {
+            width: 60px;
+            height: 30px;
+            margin: 10px;
+            border-radius: 6px;
+        }
+    </style>
+    <script>
+
+        const hack = (task, timeout = 1000, loop = Infinity) => {
+            let isRunning = false
+
+            const run = async () => {
+                if (!isRunning) return
+                if (loop-- < 0) return
+                task()
+                await new Promise(resolve => setTimeout(resolve, timeout))
+                run()
+            }
+
+            let resume = () => {
+                if (!isRunning) {
+                    isRunning = true
+                    run()
+                }
+            }
+            let pause = () => {
+                isRunning = false
+            }
+            let toggle = () => {
+                isRunning ? pause() : resume()
+            }
+            let destroy = () => {
+                isRunning = false
+                resume = pause = toggle = destroy = null
+            }
+
+            return function emit(type) {
+                switch (type) {
+                    case 'resume': resume(); break
+                    case 'pause': pause(); break
+                    case 'toggle': toggle(); break
+                    case 'destroy': destroy(); break
+                }
+            }
+        }
+
+
+        const iframe = document.querySelector('iframe')
+        const refresh = () => iframe.src = iframe.src
+        const emit = hack(refresh)
+
+        document.querySelector('button#resume').onclick = () => emit('resume')
+        document.querySelector('button#pause').onclick = () => emit('pause')
+        document.querySelector('button#toggle').onclick = () => emit('toggle')
+        document.querySelector('button#destroy').onclick = () => emit('destroy')
+    </script>
+</body>
+
+</html>
