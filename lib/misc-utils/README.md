@@ -11,15 +11,15 @@ npm publish --access public
 使用本 npm 包流程：：
 
 ```sh
-git clone https://github.com/Linhieng/@linhieng/misc-utils
+git clone https://github.com/Linhieng/Lim-utils.git
 
-cd misc-utils
+cd Lim-utils/lib/misc-utils
 
-npm install -g
+npm run install-to-local
 # 安装到本地全局 npm 包中
 
 npm list -g
-# 可以查看按照是否成功
+# 可以查看安装是否成功
 ```
 
 剩下的工作，就是在仓库中直接导入就可以了，当前，要确保你的 node 能给检索到全局 npm 包。
